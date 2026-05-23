@@ -44,7 +44,7 @@ except (NameError, AttributeError):
     pass
 
 # Disable color.
-ip.run_line_magic('colors', 'NoColor')
+ip.run_line_magic('colors', 'nocolor')
 
 # Disable the SQLite history.
 try:
@@ -179,8 +179,8 @@ def all_attributes(compl_dct) -> list:
 
 
 def _completions_attributes(varname) -> list[str]:
-    completions = ip.complete(f'{varname}.')[1]
-    ln = len(varname) + 1
+    text, completions = ip.complete(f'{varname}.')
+    ln = len(text)
     return [a[ln:] for a in completions]
 
 
@@ -212,7 +212,7 @@ def is_module(p: Path):
         return False
 
     if p.is_file():
-        if p.suffix == "py":
+        if p.suffix == ".py":
             return p
 
     if p.is_dir():
